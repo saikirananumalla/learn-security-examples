@@ -31,5 +31,8 @@ This will create a database in MongoDB called __infodisclosure__. Verify its pre
 Answer the following:
 
 1. Briefly explain the potential vulnerabilities in **insecure.ts**
+   The file logs sensitive info, lacks input sanitization, and has no access control on the /userinfo route. This exposes the app to information leaks, NoSQL injection, and unauthorized access to user data.
 2. Briefly explain how a malicious attacker can exploit them.
+   An attacker can send crafted inputs like ?username[$ne]= to bypass query logic and retrieve all users, or simply access /userinfo with any username to fetch private data due to the missing authentication checks.
 3. Briefly explain the defensive techniques used in **secure.ts** to prevent the information disclosure vulnerability?
+   It validates that username is a string and sanitizes it by removing non-alphanumeric characters, preventing injection attacks and ensuring only clean, expected input is processed.
